@@ -63,6 +63,8 @@ function log {
   return 0
 }
 
+log "INFO: new jewel2 version of container image"
+
 # ceph config file exists or die
 function check_config {
   if [[ ! -e /etc/ceph/${CLUSTER}.conf ]]; then
