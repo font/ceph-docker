@@ -34,8 +34,8 @@ spec:
           secret:
             secretName: ceph-bootstrap-rgw-keyring
       containers:
-        - name: ceph-mon
-          image: ceph/daemon:latest
+        - name: ceph-mds
+          image: font/ceph-docker-daemon:jewel-ubuntu-16.04
           ports:
             - containerPort: 6800
           env:

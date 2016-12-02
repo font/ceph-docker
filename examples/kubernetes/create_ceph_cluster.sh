@@ -1,7 +1,10 @@
 #!/bin/bash
+set -x
 
 cd generator
 ./generate_secrets.sh all `./generate_secrets.sh fsid`
+
+# minikube start --cpus 4 --disk-size 40g --memory 16384 --vm-driver kvm
 
 kubectl create namespace ceph
 
@@ -13,8 +16,8 @@ kubectl create secret generic ceph-client-key --from-file=ceph-client-key --name
 
 cd ..
 
+#-f ceph-mds-v1-dp.yaml \
 kubectl create \
--f ceph-mds-v1-dp.yaml \
 -f ceph-mon-v1-svc.yaml \
 -f ceph-mon-v1-dp.yaml \
 -f ceph-mon-check-v1-dp.yaml \

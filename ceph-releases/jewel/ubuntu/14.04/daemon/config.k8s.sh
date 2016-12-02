@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -xe
 
 function get_admin_key {
    # No-op for static
@@ -12,6 +12,10 @@ function get_mon_config {
 
   # Get the ceph mon pods (name and IP) from the Kubernetes API. Formatted as a set of monmap params
   MONMAP_ADD=$(kubectl get pods --namespace=${CLUSTER} -l daemon=mon -o template --template="{{range .items}}{{if .status.podIP}}--add {{.metadata.name}} {{.status.podIP}} {{end}} {{end}}")
+
+  if [[ -z "${MONMAP_ADD// }" ]]; then
+      exit 1
+  fi
 
   # Create a monmap with the Pod Names and IP
   monmaptool --create ${MONMAP_ADD} --fsid ${FSID} /etc/ceph/monmap-${CLUSTER}

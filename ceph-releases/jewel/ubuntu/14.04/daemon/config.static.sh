@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -xe
 
 function get_admin_key {
    # No-op for static

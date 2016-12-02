@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -xe
 
 sed -r "s/@CLUSTER@/${CLUSTER:-ceph}/g" \
     /etc/confd/conf.d/ceph.conf.toml.in > /etc/confd/conf.d/ceph.conf.toml

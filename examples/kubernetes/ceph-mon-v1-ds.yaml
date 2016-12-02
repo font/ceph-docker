@@ -34,7 +34,7 @@ spec:
             secretName: ceph-bootstrap-rgw-keyring
       containers:
         - name: ceph-mon
-          image: ceph/daemon:latest
+          image: font/ceph-docker-daemon:jewel-ubuntu-16.04
           imagePullPolicy: Always
           lifecycle:
             preStop:
