@@ -8,7 +8,7 @@ metadata:
   name: ceph-rgw
   namespace: ceph
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       name: ceph-rgw
@@ -17,9 +17,9 @@ spec:
         app: ceph
         daemon: rgw
     spec:
-      hostNetwork: true
+        #hostNetwork: true
       nodeSelector:
-        node-type: storage
+        node-type: rgw
       serviceAccount: default
       volumes:
         - name: ceph-conf
@@ -36,7 +36,7 @@ spec:
             secretName: ceph-bootstrap-rgw-keyring
       containers:
         - name: ceph-rgw
-          image: ceph/daemon:latest
+          image: gcr.io/kube-ceph-cluster/ceph-docker:jewel-ubuntu-16.04
           ports:
             - containerPort: 8080
           env:

@@ -18,7 +18,7 @@ spec:
         daemon: mds
     spec:
       nodeSelector:
-        node-type: storage
+        node-type: mds
       serviceAccount: default
       volumes:
         - name: ceph-conf
@@ -35,7 +35,7 @@ spec:
             secretName: ceph-bootstrap-rgw-keyring
       containers:
         - name: ceph-mds
-          image: font/ceph-docker-daemon:jewel-ubuntu-16.04
+          image: gcr.io/kube-ceph-cluster/ceph-docker:jewel-ubuntu-16.04
           ports:
             - containerPort: 6800
           env:
