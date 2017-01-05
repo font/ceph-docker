@@ -6,6 +6,8 @@ metadata:
   name: ceph-rbd-test
   namespace: ceph
 spec:
+  nodeSelector:
+    node-type: ceph-client
   containers:
   - name: cephrbd-rw
     image: busybox
@@ -21,7 +23,8 @@ spec:
     rbd:
       monitors:
 #This only works if you have skyDNS resolveable from the kubernetes node. Otherwise you must manually put in one or more mon pod ips.
-      - ceph-mon.ceph:6789
+      #- ceph-mon.ceph:6789
+      - 10.0.11.6:6789
       user: admin
       image: ceph-rbd-test
       pool: rbd
